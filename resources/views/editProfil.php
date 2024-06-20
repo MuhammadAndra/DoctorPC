@@ -8,7 +8,7 @@ $database = "serviceit";
 $connection = new mysqli($hostname, $username, $password, $database);
 include("../../app/Controller.php");
 if (!isset($_SESSION['login']) || $_SESSION['login'] === false) {
-    header("location: ../login.php");
+    header("location: ../../login.php");
     exit();
 }
 

@@ -105,14 +105,17 @@ if (isset($_GET['add'])) {
             </table>
         </div>
         <?php 
-        }
+        }else{
+
+        
         ?>
-        <div style="width:100%; display: flex; justify-content: center">
+        <!-- <div style="width:100%; display: flex; justify-content: center">
             <button type="button" style="" class="btn btn-primary bg-blue-500 hover:bg-blue-700 text-white"
             data-toggle="modal" data-target="#addRequestModal">
             Get Request
             </button>
         </div>
+
         <div class="modal fade" id="addRequestModal" tabindex="-1" role="dialog" aria-labelledby="addRequestModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -122,6 +125,42 @@ if (isset($_GET['add'])) {
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <div class="modal-body">
+                        <form id="addRequestForm" action="?add" method="POST">
+                            <div class="form-group">
+                                <label for="namaPelanggan">Nama:</label>
+                                <input type="text" class="form-control" id="namaPelanggan" name="namaPelanggan"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="kontakPelanggan">Kontak:</label>
+                                <input type="text" class="form-control" id="kontakPelanggan" name="kontakPelanggan"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="merkDevice">Merk Device:</label>
+                                <input type="text" class="form-control" id="merkDevice" name="merkDevice" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="deskripsi">Keluhan:</label>
+                                <textarea class="form-control" id="deskripsi" name="deskripsi" required></textarea>
+                            </div>
+
+                            <button type="submit"
+                                class="btn btn-primary bg-blue-500 hover:bg-blue-700 text-white">Tambah Request</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!-- <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div> -->
                     <div class="modal-body">
                         <!-- Form tambah request -->
                         <form id="addRequestForm" action="?add" method="POST">
@@ -150,6 +189,9 @@ if (isset($_GET['add'])) {
                     </div>
                 </div>
             </div>
+        <?php 
+        }
+        ?>
     </main>
     <script>
     $(document).ready(function() {
