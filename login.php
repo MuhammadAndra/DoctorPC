@@ -3,10 +3,12 @@ session_start();
 include 'database/connection.php';
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
-    $username =  $_POST['username'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = "SELECT ID_USER, USERNAME FROM USER WHERE USERNAME='$username' AND PASSWORD='$password'";
+    $hash = hash('sha256', $password);
+
+    $query = "SELECT ID_USER, USERNAME FROM USER WHERE USERNAME='$username'AND PASSWORD='$hash'";
     $result = mysqli_query($connection, $query);
 
     if (mysqli_num_rows($result) == 1) {
@@ -35,41 +37,44 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     <title>Login</title>
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-        <div class="grid p-6 h-screen w-screen">
-            <div class="place-self-center flex justify-center items-center">
-                <img class="scale-90" src="./storage/asset/glare-cybersecurity-and-data-protection-mobile-device-security-1.png" alt="">
-                <div class="login-form w-72">
-                    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-white-600 rounded-xl shadow-lg">
-                        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                            <h2 class="mt-2 text-center text-3xl font-bold tracking-tight text-gray-900">Login</h2>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<div class="grid p-6 h-screen w-screen">
+    <div class="place-self-center flex justify-center items-center">
+        <img class="scale-90" src="./storage/asset/glare-cybersecurity-and-data-protection-mobile-device-security-1.png" alt="">
+        <div class="login-form w-72">
+            <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-white-600 rounded-xl shadow-lg">
+                <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+                    <h2 class="mt-2 text-center text-3xl font-bold tracking-tight text-gray-900">Login</h2>
+                </div>
+                <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                    <form class="space-y-6" action="login.php" method="POST">
+                        <div>
+                            <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
+                            <div class="mt-2">
+                                <input id="username" name="username" type="username" autocomplete="username" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            </div>
                         </div>
-                        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                            <form class="space-y-6" action="login.php" method="POST">
-                                <div>
-                                    <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
-                                    <div class="mt-2">
-                                    <input id="username" name="username" type="username" autocomplete="username" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    </div>
-                                </div>
 
-                                <div>
-                                    <div class="flex items-center justify-between">
-                                    <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-                                    </div>
-                                    <div class="mt-2">
-                                    <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
-                                </div>
-                            </form>
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                            </div>
+                            <div class="mt-2">
+                                <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            </div>
                         </div>
-                    </div>
+
+                        <div>
+                            <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+                            <button onclick="window.location.href='register.php';" class="flex w-full justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 mt-3">Register</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 </body>
+
+
 </html>
