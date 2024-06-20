@@ -301,7 +301,7 @@
             <div class="swiper-slide">
               <figure class="mt-20">
                 <blockquote class="text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9">
-                  <p>"<?= htmlspecialchars($review['review']) ?>"</p>
+                  <p>"<?= $review['review'] ?>"</p>
                 </blockquote>
                 <figcaption class="mt-10">
                   <!-- Sementara menggunakan gambar default sampai ada sistem untuk gambar pengguna -->
